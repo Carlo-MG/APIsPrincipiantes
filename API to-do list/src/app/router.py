@@ -24,3 +24,8 @@ def set_tasks():
     db.session.commit()
     
     return jsonify({'message': 'Tasks created sucessfully'}), 201
+
+@routers.route('/tasks/<ID>', methods=['PUT'])
+def get_tasks_id(ID):
+    tasks = Tasks.query.get(ID)
+    return tasks.to_dict()

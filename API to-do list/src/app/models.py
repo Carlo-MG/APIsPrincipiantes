@@ -7,3 +7,11 @@ class Tasks(db.Model):
     
     def __repr__(self):
         return f'<Tasks {self.title}>'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'state': self.state
+        }
+
