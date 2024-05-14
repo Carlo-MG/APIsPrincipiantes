@@ -1,4 +1,4 @@
-from app import create_app, db
+from src import create_app, db
 from src.models import User
 
 app = create_app()
