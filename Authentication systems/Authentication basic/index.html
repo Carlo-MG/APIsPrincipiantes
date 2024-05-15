@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación Básica</title>
+</head>
+<body>
+    <h1>Autenticación Básica con Flask y JavaScript</h1>
+    <button id="protectedBtn">Acceder a ruta protegida</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('protectedBtn').addEventListener('click', () => {
+            // Credenciales
+            const username = 'user1';
+            const password = 'password1';
+
+            // Crear el encabezado de autenticación básica
+            const headers = new Headers();
+            headers.set('Authorization', 'Basic ' + btoa(username + ':' + password));
+
+            // Realizar la solicitud fetch
+            fetch('http://127.0.0.1:5000/protected', { headers: headers })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo autenticar');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('result').textContent = data;
+                })
+                .catch(error => {
+                    document.getElementById('result').textContent = error;
+                });
+        });
+    </script>
+</body>
+</html>
